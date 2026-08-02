@@ -1,13 +1,9 @@
 import { db } from "../db";
 import { posts } from "../db/schema";
+import { PostCard } from "./post-card";
 
 export async function PostList() {
   const allPosts = await db.select().from(posts);
-  return (
-    <ul>
-      {allPosts.map((post) => (
-        <li key={post.id}>{post.text}</li>
-      ))}
-    </ul>
-  );
+
+  return allPosts.map((post) => <PostCard key={post.id} post={post} />);
 }
